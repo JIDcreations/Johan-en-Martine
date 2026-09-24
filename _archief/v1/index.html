@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Johan &amp; Martine | Slagerij • Traiteur in Beervelde</title>
+  <meta name="description" content="Familieslagerij Johan & Martine in Beervelde, Lochristi. Belgisch vlees, huisgemaakte gerechten, BBQ en spitburgers voor uw feest.">
+  <link rel="icon" href="Assets/Branding/Logo-1.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/components.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <!-- Iconen, lijn 1.2px, zoals op het visitekaartje -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-adres" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.5a11 11 0 0 0 5.1 5.1l1.5-2.1 4.2 1.6V17a2.5 2.5 0 0 1-2.5 2.5A15 15 0 0 1 2.5 6 2.5 2.5 0 0 1 5 3.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13"/><path d="M3 6l9 7 9-7"/></symbol>
+  </svg>
+
+  <!-- ============ KOP ============ -->
+  <header class="kop logo-verborgen">
+    <div class="binnen">
+      <a class="kop__logo logo logo--klein" href="#top" aria-label="Johan &amp; Martine, naar boven">
+        <img src="Assets/Branding/Logo-1.svg" alt="" width="1488" height="674">
+      </a>
+
+      <nav class="kop__nav" id="menu" aria-label="Hoofdmenu">
+        <ul>
+          <li><a href="#familie">Familie</a></li>
+          <li><a href="#aanbod">Aanbod</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a class="knop knop--klein knop--vol kop__bel" href="tel:+3293555686">Bel ons</a>
+      <button class="kop__menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 1. VOORKANT ============
+         Het visitekaartje op tafel, zoals de mockups. -->
+    <section class="voorkant" id="top" aria-label="Johan &amp; Martine">
+      <img class="voorkant__foto" src="Assets/Images/hero-steaks.jpg" alt="" width="2200" height="1467" fetchpriority="high">
+
+      <div class="binnen voorkant__tafel">
+        <div class="visitekaart visitekaart--voor voorkant__voor">
+          <h1 class="logo">
+            <img src="Assets/Branding/Logo-1.svg" alt="Johan &amp; Martine" width="1488" height="674">
+            <span class="t-onder">Slagerij • Traiteur</span>
+          </h1>
+        </div>
+
+        <div class="visitekaart visitekaart--achter voorkant__achter">
+          <div class="zones">
+            <div class="zone">
+              <p class="t-stapel">Kwaliteit,<br>vakmanschap<br>en smaak<br>sinds generaties.</p>
+              <hr class="streep">
+              <p class="t-zin">Puur vlees.<br>Eerlijk lekker.</p>
+            </div>
+            <div class="zone">
+              <ul class="info">
+                <li><svg aria-hidden="true"><use href="#i-adres"/></svg><span>Beervelde-dorp 87,<br>9080 Lochristi</span></li>
+                <li><svg aria-hidden="true"><use href="#i-tel"/></svg><a href="tel:+3293555686">09 355 56 86</a></li>
+              </ul>
+              <hr class="lijn">
+              <p class="status" data-status></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. DE FAMILIE ============ -->
+    <section class="kaart kaart--bruin" id="familie" aria-labelledby="familie-titel">
+      <div class="binnen zones zones--smal">
+        <div class="zone">
+          <h2 class="t-stapel" id="familie-titel">Een familiezaak<br>in Beervelde.</h2>
+          <hr class="streep">
+          <p class="t-zin">Papa, mama<br>en twee zonen.</p>
+        </div>
+
+        <div class="zone">
+          <p class="t-zin t-zin--groot">Achter de toog staat gewoon de familie.</p>
+          <p class="tekst familie__tekst">
+            Johan en Martine, samen met
+            <!-- IN TE VULLEN: namen zonen -->
+            <span class="invullen">[naam]</span> en <span class="invullen">[naam]</span>.
+            We kennen de meeste klanten bij naam, en veel van hen weten al wat ze gaan vragen voor ze binnen zijn.
+          </p>
+          <p class="tekst">
+            Iets nodig dat niet in de toog ligt? Vraag het gerust. Wij maken het voor u klaar.
+          </p>
+          <figure class="foto foto--breed familie__foto">
+            <!-- VERVANGEN: echte foto van de familie of de winkel -->
+            <img src="Assets/Images/toonbank.jpg" alt="De toonbank met vers vlees" width="1600" height="1201" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. AANBOD ============ -->
+    <section class="kaart" id="aanbod" aria-labelledby="aanbod-titel">
+      <h2 class="verborgen" id="aanbod-titel">Aanbod</h2>
+      <div class="binnen zones">
+        <article class="zone">
+          <figure class="foto foto--kader">
+            <img src="Assets/Images/vakmanschap-snijden.jpg" alt="Vlees wordt in stukken gesneden op een houten blok" width="1400" height="958" loading="lazy">
+          </figure>
+          <h3 class="t-spatie aanbod__titel">Vlees</h3>
+          <hr class="streep">
+          <p class="tekst">
+            Steaks, gehakt, gebraad, rollades. Allemaal Belgisch, en versneden wanneer ge het komt halen.
+            Zeg met hoeveel ge zijt, dan zeggen wij hoeveel ge nodig hebt.
+          </p>
+        </article>
+
+        <article class="zone">
+          <figure class="foto foto--kader">
+            <img src="Assets/Images/gerecht-stoverij-puree.jpg" alt="Gestoofd rundvlees op puree" width="1400" height="1867" loading="lazy">
+          </figure>
+          <h3 class="t-spatie aanbod__titel">Gerechten</h3>
+          <hr class="streep">
+          <p class="tekst">
+            Voor de dagen dat het rap moet gaan. Huisgemaakt en klaar om op te warmen,
+            met hetzelfde vlees als in de toog. Ge weet dus wat er op uw bord ligt.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Fotoband -->
+    <figure class="foto foto--band">
+      <img src="Assets/Images/bbq-vuur.jpg" alt="Vlees op een barbecue met open vuur" width="1800" height="1201" loading="lazy">
+    </figure>
+
+    <!-- ============ 4. EVENTS ============ -->
+    <section class="kaart" id="events" aria-labelledby="events-titel">
+      <div class="binnen">
+        <h2 class="t-spatie t-spatie--l events__titel" id="events-titel">Events</h2>
+
+        <div class="zones zones--smal">
+          <div class="zone">
+            <p class="t-stapel">BBQ<br>Spitburgers<br>Feesten op maat.</p>
+            <hr class="streep">
+            <p class="t-zin">Iets te vieren?<br>Wij doen het vlees.</p>
+            <p class="tekst events__tekst">
+              Een verjaardag, een communie, een buurtfeest of de ploeg van de voetbal.
+              Groot of klein, laat weten wat ge van plan zijt.
+            </p>
+          </div>
+
+          <div class="zone">
+            <form class="aanvraag" data-aanvraag novalidate>
+              <div class="invul"><label for="a-naam">Naam</label><input id="a-naam" name="naam" autocomplete="name" required></div>
+              <div class="invul"><label for="a-tel">Telefoon</label><input id="a-tel" name="telefoon" type="tel" autocomplete="tel"></div>
+              <div class="invul"><label for="a-datum">Datum</label><input id="a-datum" name="datum"></div>
+              <div class="invul"><label for="a-man">Voor hoeveel man</label><input id="a-man" name="personen" inputmode="numeric"></div>
+              <div class="invul"><label for="a-wat">Wat hebt ge in gedachten</label><textarea id="a-wat" name="wat" rows="1"></textarea></div>
+
+              <div class="aanvraag__onder">
+                <button class="knop knop--vol" type="submit">Mail uw aanvraag</button>
+                <p class="aanvraag__noot">Dit opent uw mailprogramma. Liever bellen? <a href="tel:+3293555686">09 355 56 86</a></p>
+              </div>
+              <p class="aanvraag__fout" data-fout role="alert"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. CONTACT ============ -->
+    <section class="kaart kaart--bruin" id="contact" aria-labelledby="contact-titel">
+      <div class="binnen zones zones--smal">
+        <div class="zone">
+          <h2 class="t-stapel" id="contact-titel">Uren<br>&amp; contact.</h2>
+          <hr class="streep">
+          <p class="t-zin">Kom gerust langs.<br>Donderdag zijn we dicht.</p>
+          <div class="knoppen contact__knoppen">
+            <a class="knop" href="https://www.google.com/maps/search/?api=1&amp;query=Beervelde-dorp+87+9080+Lochristi" target="_blank" rel="noopener">Route plannen</a>
+          </div>
+        </div>
+
+        <div class="zone">
+          <ul class="info">
+            <li><svg aria-hidden="true"><use href="#i-adres"/></svg><span>Beervelde-dorp 87,<br>9080 Lochristi</span></li>
+            <li><svg aria-hidden="true"><use href="#i-tel"/></svg><a href="tel:+3293555686">09 355 56 86</a></li>
+            <li><svg aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@johanenmartine.be">info@johanenmartine.be</a></li>
+          </ul>
+
+          <hr class="lijn">
+
+          <p class="status" data-status></p>
+          <dl class="uren contact__uren" aria-label="Openingsuren">
+            <dt data-dag="1">Ma</dt><dd data-dag="1">07:30 – 18:30</dd>
+            <dt data-dag="2">Di</dt><dd data-dag="2">07:30 – 18:30</dd>
+            <dt data-dag="3">Wo</dt><dd data-dag="3">07:30 – 18:30</dd>
+            <dt data-dag="4">Do</dt><dd data-dag="4">Gesloten</dd>
+            <dt data-dag="5">Vr</dt><dd data-dag="5">07:30 – 18:30</dd>
+            <dt data-dag="6">Za</dt><dd data-dag="6">07:30 – 18:30</dd>
+            <dt data-dag="0">Zo</dt><dd data-dag="0">07:30 – 12:30</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ VOET ============ -->
+  <footer class="kaart voet">
+    <div class="binnen voet__binnen">
+      <div class="logo logo--middel">
+        <img src="Assets/Branding/Logo-1.svg" alt="Johan &amp; Martine" width="1488" height="674" loading="lazy">
+        <span class="t-onder">Slagerij • Traiteur</span>
+      </div>
+      <p class="voet__meta">
+        <span>Beervelde-dorp 87, 9080 Lochristi</span>
+        <span>09 355 56 86</span>
+        <span>© <span data-jaar>2026</span> Johan &amp; Martine</span>
+      </p>
+    </div>
+    <span class="koe voet__koe" aria-hidden="true"></span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Johan &amp; Martine | Design system</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system/tokens.css">
+  <link rel="stylesheet" href="design-system/components.css">
+
+  <!-- Enkel voor deze documentatiepagina. De site gebruikt dit niet. -->
+  <style>
+    .ds-hoofdstuk { display: flex; gap: var(--r-3); align-items: baseline; margin-bottom: var(--r-6); }
+    .ds-nr { font-size: var(--t-xs); letter-spacing: var(--spatie-klein); color: var(--ink-zacht); }
+    .ds-blok + .ds-blok { margin-top: var(--r-6); }
+    .ds-spec {
+      margin-top: var(--r-1);
+      font-size: var(--t-xs);
+      font-weight: var(--gewicht);
+      color: var(--ink-zacht);
+      font-variant-numeric: tabular-nums;
+    }
+    .ds-rij {
+      display: grid;
+      grid-template-columns: 11rem 1fr;
+      gap: var(--r-3);
+      padding-block: var(--r-4);
+      border-top: var(--lijn) solid var(--ink-lijn);
+    }
+    .ds-rij:last-child { border-bottom: var(--lijn) solid var(--ink-lijn); }
+    @media (max-width: 760px) { .ds-rij { grid-template-columns: 1fr; gap: var(--r-1); } }
+
+    /* kleurstalen */
+    .ds-stalen { display: grid; grid-template-columns: 1fr 1fr; }
+    .ds-staal { padding: var(--r-4); min-height: 16rem; display: flex; flex-direction: column; justify-content: space-between; }
+    .ds-staal--beige { background: var(--beige); color: var(--bruin); outline: var(--lijn) solid var(--inkt-lijn); }
+    .ds-staal--bruin { background: var(--bruin); color: var(--beige); outline: var(--lijn) solid var(--inkt-op-bruin-lijn); outline-offset: -1px; }
+    .ds-tinten { display: flex; gap: var(--r-1); margin-top: var(--r-3); }
+    .ds-tinten span { width: 2.5rem; height: 2.5rem; }
+
+    /* structuur-wireframe */
+    .ds-structuur { display: grid; gap: 0; }
+    .ds-sectie {
+      display: grid;
+      grid-template-columns: minmax(0, 22rem) 1fr;
+      gap: var(--r-4);
+      padding-block: var(--r-3);
+      border-top: var(--lijn) solid var(--ink-lijn);
+    }
+    .ds-sectie:last-child { border-bottom: var(--lijn) solid var(--ink-lijn); }
+    .ds-wire {
+      margin: 0;
+      padding: var(--r-2) var(--r-3);
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 0.68rem;
+      line-height: 1.35;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .ds-wire--beige { background: var(--beige); color: var(--bruin); outline: var(--lijn) solid var(--inkt-lijn); outline-offset: -1px; }
+    .ds-wire--bruin { background: var(--bruin); color: var(--beige); }
+    .ds-wire--foto { background: #6b5a52; color: var(--beige); }
+    .ds-sectie h3 { margin-bottom: var(--r-1); }
+    @media (max-width: 760px) { .ds-sectie { grid-template-columns: 1fr; } }
+
+    .ds-demo { padding: var(--r-5); outline: var(--lijn) solid var(--ink-lijn); outline-offset: -1px; }
+    .ds-demo.kaart--bruin { outline: 0; }
+    .ds-naast { display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 760px) { .ds-naast, .ds-stalen { grid-template-columns: 1fr; } }
+
+    .ds-regels li { padding-block: var(--r-1); }
+    .ds-regels li::before { content: ""; display: inline-block; width: var(--streep); margin-right: var(--r-2); vertical-align: middle; border-top: var(--lijn) solid currentColor; }
+    .ds-tabel { width: 100%; border-collapse: collapse; font-weight: var(--gewicht); }
+    .ds-tabel th, .ds-tabel td { text-align: left; padding: var(--r-2) var(--r-3) var(--r-2) 0; border-top: var(--lijn) solid var(--ink-lijn); vertical-align: top; }
+    .ds-tabel th { font-weight: var(--gewicht); }
+    .ds-bon { position: relative; overflow: hidden; padding: var(--r-5); background: var(--beige); color: var(--bruin); }
+  </style>
+</head>
+<body>
+
+  <!-- Iconen (lijn, 1.2px), zoals op het visitekaartje -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-adres" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.5a11 11 0 0 0 5.1 5.1l1.5-2.1 4.2 1.6V17a2.5 2.5 0 0 1-2.5 2.5A15 15 0 0 1 2.5 6 2.5 2.5 0 0 1 5 3.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13"/><path d="M3 6l9 7 9-7"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+  </svg>
+
+  <!-- ============ TITEL ============ -->
+  <header class="kaart">
+    <div class="binnen">
+      <div class="zones zones--smal">
+        <div class="zone">
+          <div class="logo logo--middel">
+            <img src="Assets/Branding/Logo-1.svg" alt="Johan &amp; Martine" width="1488" height="674">
+            <span class="t-onder">Slagerij • Traiteur</span>
+          </div>
+        </div>
+        <div class="zone">
+          <h1 class="t-spatie t-spatie--l">Design</h1>
+          <p class="t-spatie" style="margin-top:.2em">system</p>
+          <hr class="streep">
+          <p class="tekst">
+            Alles hieronder komt rechtstreeks uit het drukwerk: het visitekaartje en de cadeaubon.
+            De site gebruikt enkel deze bouwstenen. Wat hier niet staat, komt niet op de site.
+          </p>
+          <p class="ds-spec" style="margin-top:var(--r-3)">
+            Bestanden: design-system/tokens.css · design-system/components.css
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ============ 1. PRINCIPE ============ -->
+  <section class="kaart kaart--bruin">
+    <div class="binnen">
+      <div class="zones zones--smal">
+        <div class="zone">
+          <p class="t-stapel">Principe</p>
+          <hr class="streep">
+          <p class="t-zin">Elke sectie<br>is een kaart.</p>
+        </div>
+        <div class="zone">
+          <p class="t-zin t-zin--groot">
+            De site leest als het drukwerk: afwisselend een voorkant in beige en een achterkant in bruin.
+            Daartussen liggen foto's, zoals de tafel in de mockups.
+          </p>
+          <ul class="ds-regels tekst" style="margin-top:var(--r-4)">
+            <li>Eén letter, één gewicht: DM Sans Light.</li>
+            <li>Het logo is het enige grote, expressieve element.</li>
+            <li>Titels zijn wijd gespatieerde kapitalen, zoals C A D E A U B O N.</li>
+            <li>Een verticale kolomlijn verdeelt de kaart in zones.</li>
+            <li>Een kort streepje leidt van kapitalen naar een gewone zin.</li>
+            <li>Veel lege ruimte. Kleine tekst. Geen schaduw, geen afgeronde hoeken.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 2. STRUCTUUR ============ -->
+  <section class="kaart" id="structuur">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">01</span><h2 class="t-spatie">Structuur</h2></div>
+
+      <p class="tekst" style="margin-bottom:var(--r-5)">
+        Eén pagina, van boven naar onder. Beige en bruin wisselen elkaar af, en een fotoband staat telkens tussen twee kaarten.
+        Bezoekers willen vooral weten wanneer we open zijn en hoe ze ons bereiken. Daarom staat dat al op de voorkant, en nog eens volledig onderaan.
+      </p>
+
+      <div class="ds-structuur">
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--beige">
+ Johan&amp;M.            VLEES  EVENTS  CONTACT  [BEL]
+</pre>
+          <div>
+            <h3 class="t-stapel">Kop</h3>
+            <p class="tekst">Klein logo (verschijnt pas als het grote logo weg is), menu en belknop. Blijft bovenaan staan.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--foto">
+ [ foto: vlees op hout, volle breedte ]
+    ┌────────────────┐
+    │    Johan &amp;     │
+    │     Martine    ┌────────────────┐
+    │ SLAGERIJ•TRAIT │ KWALITEIT, │ ◎ │
+    └────────────────│ ...        │ ✆ │
+                     │ Puur vlees │ open│
+                     └────────────────┘
+</pre>
+          <div>
+            <h3 class="t-stapel">1. Voorkant</h3>
+            <p class="tekst">Het visitekaartje op tafel, zoals de mockups. Een grote foto met daarop de beige voorkant (logo) en de bruine achterkant (stapel, adres, telefoon, open of niet). Beide even groot, licht verschoven.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--bruin">
+ KWALITEIT,        │  Achter de toog staat
+ VAKMANSCHAP       │  gewoon de familie.
+ EN SMAAK          │
+ SINDS GENERATIES. │  Johan, Martine en hun
+ ──                │  twee zonen...
+ Papa, mama        │
+ en twee zonen.    │  [foto familie]
+</pre>
+          <div>
+            <h3 class="t-stapel">2. De familie</h3>
+            <p class="tekst">De achterkant van het visitekaartje: links de stapel, rechts wie we zijn. Hier komt later een echte familiefoto.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--beige">
+ [ foto         ]  │  [ foto         ]
+ [              ]  │  [              ]
+ V L E E S         │  G E R E C H T E N
+ ──                │  ──
+ Belgisch, hier    │  Klaar om op te
+ versneden...      │  warmen...
+</pre>
+          <div>
+            <h3 class="t-stapel">3. Aanbod</h3>
+            <p class="tekst">Twee zones, twee dingen: vers vlees en gerechten. Spatietitel, streepje, twee zinnen.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--foto">
+
+      [ foto: BBQ, volle breedte ]
+
+</pre>
+          <div>
+            <h3 class="t-stapel">Fotoband</h3>
+            <p class="tekst">Vuur, rooster, buiten.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--beige">
+ E V E N T S
+ BBQ               │  NAAM        ___________
+ SPITBURGERS       │  DATUM       ___________
+ FEESTEN OP MAAT.  │  AANTAL MAN  ___________
+ ──                │  WAT         ___________
+ Iets te vieren?   │
+ Wij doen het vlees│  [MAIL UW AANVRAAG]
+</pre>
+          <div>
+            <h3 class="t-stapel">4. Events</h3>
+            <p class="tekst">De invullijnen van de cadeaubon worden een aanvraag. Die opent een ingevulde mail, dus er is geen server nodig.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--bruin">
+ UREN              │  ◎ Beervelde-dorp 87,
+ &amp; CONTACT.        │    9080 Lochristi
+                   │  ✆ 09 355 56 86
+                   │  ✉ info@johanenmartine.be
+ ──                │  ─────────────────────
+ Kom gerust        │  Ma 07:30 – 18:30
+ langs.            │  Di ...   Do Gesloten
+ [ROUTE]           │  Zo 07:30 – 12:30
+</pre>
+          <div>
+            <h3 class="t-stapel">5. Contact</h3>
+            <p class="tekst">De achterkant van het visitekaartje, volledig: alle gegevens en de uren per dag, plus route plannen.</p>
+          </div>
+        </div>
+
+        <div class="ds-sectie">
+<pre class="ds-wire ds-wire--beige">
+
+              Johan &amp;          (koe
+               Martine          van de
+         SLAGERIJ • TRAITEUR    rand)
+
+</pre>
+          <div>
+            <h3 class="t-stapel">Voet</h3>
+            <p class="tekst">Beige, het logo en de koe van de cadeaubon die van de rand loopt.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 3. KLEUR ============ -->
+  <section class="kaart kaart--bruin">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">02</span><h2 class="t-spatie">Kleur</h2></div>
+
+      <div class="ds-stalen">
+        <div class="ds-staal ds-staal--beige">
+          <div>
+            <p class="t-stapel">Papier</p>
+            <p class="ds-spec" style="color:inherit">--beige · #D6D2C4</p>
+          </div>
+          <div>
+            <p class="t-zin">Achtergrond van de voorkant.<br>Tekst op bruin.</p>
+            <div class="ds-tinten" aria-label="Tinten van bruin op beige">
+              <span style="background:var(--inkt)"></span>
+              <span style="background:var(--inkt-zacht)"></span>
+              <span style="background:var(--inkt-lijn)"></span>
+            </div>
+            <p class="ds-spec" style="color:inherit">inkt 100% · zacht 74% (tekst, 5.3:1) · lijn 55%</p>
+          </div>
+        </div>
+        <div class="ds-staal ds-staal--bruin">
+          <div>
+            <p class="t-stapel">Inkt</p>
+            <p class="ds-spec" style="color:inherit">--bruin · #382F2D</p>
+          </div>
+          <div>
+            <p class="t-zin">Achtergrond van de achterkant.<br>Tekst op beige.</p>
+            <div class="ds-tinten" aria-label="Tinten van beige op bruin">
+              <span style="background:var(--inkt-op-bruin)"></span>
+              <span style="background:var(--inkt-op-bruin-zacht)"></span>
+              <span style="background:var(--inkt-op-bruin-lijn)"></span>
+            </div>
+            <p class="ds-spec" style="color:inherit">inkt 100% · zacht 74% (tekst, 5.3:1) · lijn 50%</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="tekst" style="margin-top:var(--r-4)">
+        Er zijn maar twee kleuren. Andere tinten zijn transparanties van dezelfde inkt, zoals op drukwerk.
+        De warmte komt uit de foto's. Contrast bruin/beige: 8.6:1.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============ 4. TYPOGRAFIE ============ -->
+  <section class="kaart">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">03</span><h2 class="t-spatie">Typografie</h2></div>
+
+      <p class="tekst" style="margin-bottom:var(--r-5)">
+        DM Sans Light, het enige lettertype in het drukwerk. Lopende tekst staat op 350 omdat licht op scherm te dun wordt.
+        Er zijn geen vetten en geen cursief, en geen tweede lettertype.
+      </p>
+
+      <div class="ds-rij">
+        <div><p class="t-onder">Logo</p><p class="ds-spec">SVG, nooit nazetten</p></div>
+        <div><img src="Assets/Branding/Logo-1.svg" alt="Johan &amp; Martine" style="width:260px"></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Spatietitel L</p><p class="ds-spec">.t-spatie--l · 34→72px · 300 · +0.5em · kapitalen</p></div>
+        <div><p class="t-spatie t-spatie--l">Cadeaubon</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Spatietitel</p><p class="ds-spec">.t-spatie · 26→40px · 300 · +0.5em · één woord per titel</p></div>
+        <div><p class="t-spatie">Gerechten</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Zin groot</p><p class="ds-spec">.t-zin--groot · 20→24px · 300 · max 30 tekens breed</p></div>
+        <div><p class="t-zin t-zin--groot">Achter de toog staat gewoon de familie.</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Stapel</p><p class="ds-spec">.t-stapel · 14px · 300 · +0.22em · korte regels</p></div>
+        <div><p class="t-stapel">Kwaliteit,<br>vakmanschap<br>en smaak<br>sinds generaties.</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Zin</p><p class="ds-spec">.t-zin · 17px · 300</p></div>
+        <div><p class="t-zin">Puur vlees.<br>Eerlijk lekker.</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Tekst</p><p class="ds-spec">.tekst · 17px · 350 · 1.65 · max 54 tekens</p></div>
+        <div><p class="tekst">Steaks, gehakt, gebraad en rollades. Allemaal Belgisch, en versneden wanneer ge het komt halen. Zeg met hoeveel ge zijt, dan zeggen wij hoeveel ge nodig hebt.</p></div>
+      </div>
+      <div class="ds-rij">
+        <div><p class="t-onder">Onderschrift</p><p class="ds-spec">.t-onder · 12px · 300 · +0.3em</p></div>
+        <div><p class="t-onder">Slagerij • Traiteur</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 5. LIJNEN & ZONES ============ -->
+  <section class="kaart kaart--bruin">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">04</span><h2 class="t-spatie">Zones</h2></div>
+
+      <p class="tekst" style="margin-bottom:var(--r-5)">
+        Het raster van het visitekaartje. Een kaart wordt verdeeld door een verticale haarlijn (1px).
+        Links staat de stapel, dan het streepje en de zin; rechts de inhoud. Op gsm stapelen de zones en wordt de lijn horizontaal.
+        Klassen: <code>.zones</code>, <code>.zones--smal</code> (1:2) en <code>.zones--drie</code>.
+      </p>
+
+      <div class="zones zones--smal">
+        <div class="zone">
+          <p class="t-stapel">Kwaliteit,<br>vakmanschap<br>en smaak<br>sinds generaties.</p>
+          <hr class="streep">
+          <p class="t-zin">Puur vlees.<br>Eerlijk lekker.</p>
+        </div>
+        <div class="zone">
+          <ul class="info">
+            <li><svg aria-hidden="true"><use href="#i-adres"/></svg><span>Beervelde-dorp 87,<br>9080 Lochristi</span></li>
+            <li><svg aria-hidden="true"><use href="#i-tel"/></svg><a href="tel:+3293555686">09 355 56 86</a></li>
+            <li><svg aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:info@johanenmartine.be">info@johanenmartine.be</a></li>
+          </ul>
+          <hr class="lijn">
+          <dl class="uren">
+            <dt>Ma</dt><dd>07:30 – 18:30</dd>
+            <dt>Di</dt><dd>07:30 – 18:30</dd>
+            <dt>Wo</dt><dd>07:30 – 18:30</dd>
+            <dt class="is-vandaag">Do</dt><dd class="is-vandaag">Gesloten</dd>
+            <dt>Vr</dt><dd>07:30 – 18:30</dd>
+            <dt>Za</dt><dd>07:30 – 18:30</dd>
+            <dt>Zo</dt><dd>07:30 – 12:30</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 6. COMPONENTEN ============ -->
+  <section class="kaart">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">05</span><h2 class="t-spatie">Onderdelen</h2></div>
+
+      <!-- Knoppen -->
+      <div class="ds-blok">
+        <p class="t-stapel">Knop</p>
+        <p class="ds-spec" style="margin-bottom:var(--r-3)">.knop · .knop--vol · .knop--klein (kop) · 1px kader, rechte hoeken, onderschrift-stijl. Werkt op beide kanten.</p>
+        <div class="ds-naast">
+          <div class="ds-demo kaart" style="padding-block:var(--r-5)">
+            <div class="knoppen"><a class="knop knop--vol" href="#">Bel 09 355 56 86</a><a class="knop" href="#">Route plannen</a></div>
+          </div>
+          <div class="ds-demo kaart kaart--bruin" style="padding-block:var(--r-5)">
+            <div class="knoppen"><a class="knop knop--vol" href="#">Bel 09 355 56 86</a><a class="knop" href="#">Route plannen</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invullijn -->
+      <div class="ds-blok">
+        <p class="t-stapel">Invullijn</p>
+        <p class="ds-spec" style="margin-bottom:var(--r-3)">.invul · de lijnen van de cadeaubon, als echt invulveld · .invul__waarde voor een vaste, gedrukte waarde (op de bon)</p>
+        <div class="ds-demo" style="max-width:36rem">
+          <div class="invul"><label for="d1">Naam</label><input id="d1"></div>
+          <div class="invul"><label for="d2">Datum</label><input id="d2"></div>
+          <div class="invul"><label for="d3">Voor hoeveel man</label><input id="d3" inputmode="numeric"></div>
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="ds-blok">
+        <p class="t-stapel">Logo met onderschrift</p>
+        <p class="ds-spec" style="margin-bottom:var(--r-3)">.logo--groot (voorkant) · .logo--middel (bon, voet) · .logo--klein (kop) · Logo-1.svg op beige, Logo-Beige.svg op bruin</p>
+        <div class="ds-naast">
+          <div class="ds-demo" style="display:grid;place-items:center;padding-block:var(--r-6)">
+            <div class="logo logo--middel"><img src="Assets/Branding/Logo-1.svg" alt="Johan &amp; Martine"><span class="t-onder">Slagerij • Traiteur</span></div>
+          </div>
+          <div class="ds-demo kaart kaart--bruin" style="display:grid;place-items:center;padding-block:var(--r-6)">
+            <div class="logo logo--middel"><img src="Assets/Branding/Logo-Beige.svg" alt="Johan &amp; Martine"><span class="t-onder">Slagerij • Traiteur</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Koe -->
+      <div class="ds-blok">
+        <p class="t-stapel">Koe</p>
+        <p class="ds-spec" style="margin-bottom:var(--r-3)">.koe · loopt altijd van de rand · één keer per pagina (de voet) · enkel bruin op beige</p>
+        <div class="ds-demo" style="position:relative;overflow:hidden;min-height:16rem;max-width:36rem">
+          <p class="t-spatie">Cadeaubon</p>
+          <span class="koe" style="top:1.5rem"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 7. TOON ============ -->
+  <section class="kaart kaart--bruin">
+    <div class="binnen">
+      <div class="ds-hoofdstuk"><span class="ds-nr">06</span><h2 class="t-spatie">Toon</h2></div>
+
+      <div class="zones zones--smal">
+        <div class="zone">
+          <p class="t-stapel">Zoals aan<br>de toog.</p>
+          <hr class="streep">
+          <p class="t-zin">Vlaams, kort,<br>zonder poespas.</p>
+        </div>
+        <div class="zone">
+          <table class="ds-tabel">
+            <thead><tr><th class="t-onder">Niet</th><th class="t-onder">Wel</th></tr></thead>
+            <tbody>
+              <tr><td>Ontdek onze passie voor ambachtelijk vlees!</td><td>Belgisch vlees, hier versneden en gekruid.</td></tr>
+              <tr><td>Wij verzorgen uw event van A tot Z.</td><td>Laat weten wat ge van plan zijt en voor hoeveel man.</td></tr>
+              <tr><td>Het perfecte cadeau voor elke vleesliefhebber.</td><td>Iedereen eet.</td></tr>
+              <tr><td>Neem contact met ons op.</td><td>Bel of kom gerust langs.</td></tr>
+            </tbody>
+          </table>
+          <p class="tekst" style="margin-top:var(--r-4)">
+            Gebruik "ge" en "uw", en woorden als toog, rap en voor hoeveel man.
+            Vermijd passie, beleving, ontdek en uniek, uitroeptekens, en Hollands zoals "je" of "gezellig".
+            Beloof niets wat we niet weten: geen namen van boeren, labels of prijzen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

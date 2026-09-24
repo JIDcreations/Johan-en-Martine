@@ -1,0 +1,134 @@
+/* ==========================================================================
+   JOHAN & MARTINE — SITE
+   Enkel compositie per sectie. Geen nieuwe kleuren, maten of lettertypes:
+   alles komt uit design-system/tokens.css en components.css.
+   ========================================================================== */
+
+
+/* ---------- 1. Voorkant ------------------------------------------------
+   Foto = de tafel. Daarop voor- en achterkant van het visitekaartje,
+   licht verschoven, zoals in de mockups.
+   ------------------------------------------------------------------------- */
+.voorkant {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: min(calc(100svh - 4.25rem), 56rem);
+  overflow: hidden;
+  background: var(--bruin);
+}
+.voorkant__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.voorkant__tafel {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding-block: var(--r-6);
+}
+/* Twee kaartjes van dezelfde maat, de achterkant schuift over een hoek */
+.voorkant__voor {
+  grid-column: 2 / span 5;
+  grid-row: 1;
+  align-self: start;
+}
+.voorkant__achter {
+  grid-column: 6 / span 5;
+  grid-row: 1;
+  align-self: start;
+  margin-top: 30%;
+}
+
+@media (max-width: 1000px) {
+  .voorkant__voor { grid-column: 1 / span 7; }
+  .voorkant__achter { grid-column: 6 / span 7; margin-top: 42%; }
+}
+
+@media (max-width: 760px) {
+  .voorkant { min-height: auto; }
+  .voorkant__tafel { grid-template-columns: 1fr; padding-block: var(--r-6); }
+  .voorkant__voor { grid-column: 1; width: 86%; }
+  .voorkant__achter { grid-column: 1; grid-row: 2; width: 86%; justify-self: end; margin-top: -1.25rem; }
+}
+
+
+/* Fotoband minder hoog op gsm */
+@media (max-width: 760px) { .foto--band { height: 16rem; } }
+
+
+/* ---------- 2. Familie -------------------------------------------------- */
+.familie__tekst { margin-top: var(--r-4); }
+.familie__foto { margin-top: var(--r-5); }
+
+/* Tekst die nog ingevuld moet worden */
+.invullen {
+  padding-inline: 0.2em;
+  border-bottom: var(--lijn) dashed currentColor;
+  color: var(--ink);
+}
+
+
+/* ---------- 3. Aanbod --------------------------------------------------- */
+.aanbod__titel { margin-top: var(--r-4); }
+
+
+/* ---------- 4. Events --------------------------------------------------- */
+.events__titel { margin-bottom: var(--r-6); }
+.events__tekst { margin-top: var(--r-4); }
+
+.aanvraag { display: grid; gap: var(--r-1); }
+.aanvraag__onder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--r-2) var(--r-4);
+  margin-top: var(--r-4);
+}
+.aanvraag__noot {
+  font-size: var(--t-s);
+  font-weight: var(--gewicht);
+  color: var(--ink-zacht);
+}
+.aanvraag__fout {
+  font-size: var(--t-s);
+  font-weight: var(--gewicht);
+}
+.aanvraag__fout:empty { display: none; }
+
+
+/* ---------- 5. Contact -------------------------------------------------- */
+.contact__knoppen { margin-top: var(--r-5); }
+.contact__uren { margin-top: var(--r-2); }
+.status { color: var(--ink-zacht); }
+.status:empty { display: none; }
+
+
+/* ---------- Voet -------------------------------------------------------- */
+.voet {
+  overflow: hidden;
+  padding-block: var(--r-7) var(--r-5);
+}
+.voet__koe { top: var(--r-5); height: 70%; width: auto; }
+@media (max-width: 760px) { .voet__koe { height: 9rem; top: var(--r-3); } }
+.voet__binnen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--r-6);
+  text-align: center;
+}
+.voet__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--r-1) var(--r-3);
+  font-size: var(--t-xs);
+  font-weight: var(--gewicht);
+  letter-spacing: 0.08em;
+  color: var(--ink-zacht);
+}

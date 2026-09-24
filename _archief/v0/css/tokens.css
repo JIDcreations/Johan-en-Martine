@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Johan & Martine — Design tokens
+   Eén bron voor kleur, typo, spacing. Zie STYLEGUIDE.md voor gebruik.
+   ========================================================================== */
+
+:root {
+  /* --- Kleuren: merk ------------------------------------------------------ */
+  --jm-beige: #d6d2c4;          /* hoofdkleur, achtergrond */
+  --jm-bruin: #382f2d;          /* hoofdkleur, tekst + donkere vlakken */
+
+  /* --- Kleuren: afgeleid (enkel deze gebruiken, geen nieuwe verzinnen) --- */
+  --jm-beige-licht: #e4e1d6;    /* afwisselend vlak op beige */
+  --jm-beige-lijn: #b9b3a2;     /* dunne lijnen op beige */
+  --jm-bruin-zacht: #5c514e;    /* secundaire tekst op beige (contrast 5.0:1) */
+  --jm-bruin-diep: #2b2422;     /* footer, extra diepte */
+  --jm-beige-op-bruin: rgba(214, 210, 196, 0.72); /* secundaire tekst op bruin */
+  --jm-lijn-op-bruin: rgba(214, 210, 196, 0.28);  /* dunne lijnen op bruin */
+
+  /* --- Semantisch -------------------------------------------------------- */
+  --color-bg: var(--jm-beige);
+  --color-text: var(--jm-bruin);
+  --color-text-muted: var(--jm-bruin-zacht);
+  --color-line: var(--jm-beige-lijn);
+  --color-inverse-bg: var(--jm-bruin);
+  --color-inverse-text: var(--jm-beige);
+  --color-focus: var(--jm-bruin);
+
+  /* --- Typografie -------------------------------------------------------- */
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Typoschaal (vloeiend tussen mobiel en desktop) */
+  --fs-display: clamp(2.75rem, 1.6rem + 5vw, 5.5rem);   /* H1 */
+  --fs-h2: clamp(2rem, 1.35rem + 2.8vw, 3.5rem);        /* sectietitel */
+  --fs-h3: clamp(1.35rem, 1.2rem + 0.6vw, 1.75rem);     /* subtitel */
+  --fs-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem); /* intro-tekst */
+  --fs-body: 1.0625rem;                                 /* 17px */
+  --fs-small: 0.9375rem;                                /* 15px */
+  --fs-eyebrow: 0.8125rem;                              /* 13px, kapitalen */
+
+  --lh-tight: 1.04;
+  --lh-heading: 1.12;
+  --lh-body: 1.6;
+
+  --ls-display: -0.025em;
+  --ls-heading: -0.015em;
+  --ls-eyebrow: 0.28em;   /* de wijde kapitalen van het visitekaartje */
+
+  /* --- Spacing (basis 8px) ---------------------------------------------- */
+  --space-1: 0.25rem;  /*  4 */
+  --space-2: 0.5rem;   /*  8 */
+  --space-3: 1rem;     /* 16 */
+  --space-4: 1.5rem;   /* 24 */
+  --space-5: 2rem;     /* 32 */
+  --space-6: 3rem;     /* 48 */
+  --space-7: 4rem;     /* 64 */
+  --space-8: 6rem;     /* 96 */
+  --space-section: clamp(4.5rem, 3rem + 7vw, 9rem);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --container: 1200px;
+  --container-narrow: 720px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+
+  /* --- Vorm & beweging --------------------------------------------------- */
+  --radius: 0;            /* drukwerk-gevoel: rechte hoeken */
+  --line: 1px solid var(--color-line);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 220ms;
+}

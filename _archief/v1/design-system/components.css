@@ -1,0 +1,464 @@
+/* ==========================================================================
+   JOHAN & MARTINE — COMPONENTEN
+   Elke component is een element uit het drukwerk, vertaald naar scherm.
+   Volgorde: basis → kaart → type → lijnen → zones → onderdelen.
+   ========================================================================== */
+
+/* ---------- 0. Basis ---------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+
+body {
+  margin: 0;
+  background: var(--beige);
+  color: var(--bruin);
+  font-family: var(--font);
+  font-size: var(--t-m);
+  font-weight: var(--gewicht-tekst);
+  line-height: var(--regel-tekst);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+figure, h1, h2, h3, p, dl, dd, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+h1, h2, h3 { font-weight: var(--gewicht); font-size: inherit; }
+a { color: inherit; }
+:focus-visible { outline: var(--lijn) solid currentColor; outline-offset: 4px; }
+
+.verborgen {
+  position: absolute !important; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+
+
+/* ---------- 1. KAART ------------------------------------------------------
+   Elke sectie is een kaart: voorkant (beige) of achterkant (bruin).
+   Een kaart zet twee variabelen: --papier en --ink. Alle componenten
+   daarbinnen gebruiken enkel die, dus ze werken op beide kanten.
+   ------------------------------------------------------------------------- */
+.kaart {
+  --papier: var(--beige);
+  --ink: var(--inkt);
+  --ink-zacht: var(--inkt-zacht);
+  --ink-lijn: var(--inkt-lijn);
+
+  position: relative;
+  padding-block: var(--kaart-pad);
+  background: var(--papier);
+  color: var(--ink);
+}
+
+.kaart--bruin {
+  --papier: var(--bruin);
+  --ink: var(--inkt-op-bruin);
+  --ink-zacht: var(--inkt-op-bruin-zacht);
+  --ink-lijn: var(--inkt-op-bruin-lijn);
+}
+
+.binnen {
+  width: 100%;
+  max-width: calc(var(--breedte) + 2 * var(--rand));
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+
+/* ---------- 2. TYPE ------------------------------------------------------ */
+
+/* Spatietitel: "C A D E A U B O N". Eén woord, wijd, licht. */
+.t-spatie {
+  display: block;
+  font-size: var(--t-xl);
+  font-weight: var(--gewicht);
+  line-height: 1.1;
+  letter-spacing: var(--spatie-titel);
+  text-transform: uppercase;
+  /* de laatste letter krijgt ook spatiëring; corrigeren voor uitlijning */
+  margin-right: calc(var(--spatie-titel) * -1);
+}
+.t-spatie--l { font-size: var(--t-xxl); }
+
+/* Stapel: "KWALITEIT, / VAKMANSCHAP / EN SMAAK". Korte regels, kapitalen. */
+.t-stapel {
+  font-size: var(--t-s);
+  font-weight: var(--gewicht);
+  line-height: var(--regel-krap);
+  letter-spacing: var(--spatie-stapel);
+  text-transform: uppercase;
+}
+
+/* Onderschrift: "SLAGERIJ • TRAITEUR". Klein, labels. */
+.t-onder {
+  font-size: var(--t-xs);
+  font-weight: var(--gewicht);
+  line-height: 1.4;
+  letter-spacing: var(--spatie-klein);
+  text-transform: uppercase;
+}
+
+/* Zin: "Puur vlees. Eerlijk lekker." Gewone zin, licht. */
+.t-zin {
+  font-size: var(--t-m);
+  font-weight: var(--gewicht);
+  line-height: 1.45;
+}
+.t-zin--groot {
+  font-size: var(--t-l);
+  line-height: 1.4;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+
+/* Lopende tekst */
+.tekst {
+  max-width: 54ch;
+  color: var(--ink-zacht);
+  text-wrap: pretty;
+}
+.tekst + .tekst { margin-top: var(--r-2); }
+
+
+/* ---------- 3. LIJNEN ---------------------------------------------------- */
+
+/* Streep: het korte lijntje onder een stapel, voor de zin. */
+.streep {
+  display: block;
+  width: var(--streep);
+  height: 0;
+  margin: var(--r-3) 0;
+  border: 0;
+  border-top: var(--lijn) solid currentColor;
+}
+
+/* Lijn: horizontale haarlijn over de volle breedte van de zone. */
+.lijn {
+  height: 0;
+  margin: var(--r-3) 0;
+  border: 0;
+  border-top: var(--lijn) solid var(--ink-lijn);
+}
+
+
+/* ---------- 4. ZONES ------------------------------------------------------
+   Het raster van de kaart: zones gescheiden door een verticale kolomlijn,
+   zoals de achterkant van het visitekaartje.
+   .zones            twee gelijke zones
+   .zones--smal      smalle zone links (1:2), voor stapel + inhoud
+   .zones--drie      drie gelijke zones
+   Op smal scherm stapelen ze; de kolomlijn wordt een horizontale lijn.
+   ------------------------------------------------------------------------- */
+.zones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.zones--smal { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.zones--drie { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.zone { padding-right: var(--zone-gat); }
+.zone:last-child { padding-right: 0; }
+.zone + .zone {
+  padding-left: var(--zone-gat);
+  border-left: var(--lijn) solid var(--ink-lijn);
+}
+
+@media (max-width: 760px) {
+  .zones, .zones--smal, .zones--drie { grid-template-columns: 1fr; }
+  .zone { padding-right: 0; }
+  .zone + .zone {
+    padding-left: 0;
+    padding-top: var(--r-5);
+    margin-top: var(--r-5);
+    border-left: 0;
+    border-top: var(--lijn) solid var(--ink-lijn);
+  }
+}
+
+
+/* ---------- 5. LOGO ------------------------------------------------------
+   Logo + onderschrift als één blok, zoals op de voorkant van het kaartje.
+   Kleur: Logo-1.svg op beige, Logo-Beige.svg op bruin.
+   ------------------------------------------------------------------------- */
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9em;
+  text-decoration: none;
+}
+.logo img { width: 100%; height: auto; }
+.logo .t-onder { margin-right: calc(var(--spatie-klein) * -1); white-space: nowrap; }
+
+.logo--groot { width: min(78vw, 560px); }
+.logo--groot .t-onder { font-size: clamp(0.75rem, 0.6rem + 0.5vw, 0.95rem); }
+.logo--middel { width: 240px; }
+.logo--klein { width: 92px; }
+
+
+/* ---------- 6. KNOP ------------------------------------------------------
+   Het drukwerk heeft geen knoppen; deze volgt de onderschrift-stijl
+   in een haarlijnkader. Rechte hoeken.
+   ------------------------------------------------------------------------- */
+.knop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.9rem 1.6rem;
+  border: var(--lijn) solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--t-xs);
+  font-weight: var(--gewicht-tekst);
+  letter-spacing: var(--spatie-stapel);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duur) var(--curve), color var(--duur) var(--curve);
+}
+.knop:hover,
+.knop--vol { background: var(--ink); color: var(--papier); }
+.knop--vol:hover { background: transparent; color: var(--ink); }
+
+.knop--klein { min-height: 2.5rem; padding: 0.6rem 1.1rem; }
+
+.knoppen { display: flex; flex-wrap: wrap; gap: var(--r-2); }
+
+
+/* ---------- 7. INFO ------------------------------------------------------
+   Lijst met lijn-icoontjes, zoals de contactgegevens op het kaartje.
+   ------------------------------------------------------------------------- */
+.info { display: grid; gap: var(--r-2); }
+.info li {
+  display: grid;
+  grid-template-columns: 1.1rem 1fr;
+  gap: var(--r-2);
+  align-items: start;
+  font-weight: var(--gewicht);
+}
+.info svg {
+  width: 1.1rem; height: 1.1rem;
+  margin-top: 0.22em;
+  fill: none; stroke: currentColor; stroke-width: 1.2;
+}
+.info a { text-decoration: none; }
+.info a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+
+/* ---------- 8. UREN ------------------------------------------------------
+   "Ma 07:30 – 18:30". Compact, twee kolommen, cijfers op één lijn.
+   ------------------------------------------------------------------------- */
+.uren {
+  display: grid;
+  grid-template-columns: 2.4em auto;
+  gap: 0.2rem var(--r-2);
+  font-size: var(--t-s);
+  font-weight: var(--gewicht);
+  font-variant-numeric: tabular-nums;
+}
+.uren dt { color: var(--ink-zacht); }
+.uren .is-vandaag { color: var(--ink); font-weight: var(--gewicht-tekst); }
+.uren dd.is-vandaag::after {
+  content: "vandaag";
+  margin-left: var(--r-2);
+  font-size: var(--t-xs);
+  letter-spacing: var(--spatie-klein);
+  text-transform: uppercase;
+  font-weight: var(--gewicht);
+  color: var(--ink-zacht);
+}
+
+.status { font-size: var(--t-s); font-weight: var(--gewicht); }
+
+
+/* ---------- 9. INVULLIJN -------------------------------------------------
+   "GESCHONKEN DOOR ______" van de cadeaubon, als echt invulveld.
+   ------------------------------------------------------------------------- */
+.invul {
+  display: flex;
+  align-items: baseline;
+  gap: var(--r-2);
+  padding-block: var(--r-1);
+}
+.invul label {
+  flex: none;
+  font-size: var(--t-xs);
+  letter-spacing: var(--spatie-klein);
+  text-transform: uppercase;
+  font-weight: var(--gewicht);
+}
+.invul input,
+.invul textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 0.35rem 0;
+  border: 0;
+  border-bottom: var(--lijn) solid var(--ink-lijn);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: var(--gewicht);
+}
+.invul textarea { resize: none; min-height: 2.2em; overflow: hidden; }
+.invul input:focus,
+.invul textarea:focus { outline: 0; border-bottom-color: var(--ink); }
+
+/* Vaste invullijn (niet invulbaar), zoals gedrukt op de bon */
+.invul__waarde {
+  flex: 1;
+  padding: 0.35rem 0;
+  border-bottom: var(--lijn) solid var(--ink-lijn);
+  font-weight: var(--gewicht);
+}
+
+@media (max-width: 480px) {
+  .invul { flex-direction: column; align-items: stretch; gap: 0; }
+}
+
+
+/* ---------- 10. FOTO -----------------------------------------------------
+   Foto's zijn "de tafel" waarop de kaarten liggen, zoals in de mockups.
+   .foto--band   volle breedte tussen twee kaarten
+   .foto--kader  binnen een zone, vaste verhouding
+   ------------------------------------------------------------------------- */
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+.foto--band { height: clamp(18rem, 55vh, 38rem); }
+.foto--kader { aspect-ratio: 4 / 3; }
+.foto--liggend { aspect-ratio: 3 / 2; }
+.foto--breed { aspect-ratio: 16 / 9; }
+
+
+/* ---------- 11. KOE ------------------------------------------------------
+   De gravure van de cadeaubon. Loopt altijd van de rand af, nooit
+   vrijstaand. Enkel op beige: op bruin leest ze als een negatief.
+   De snijkant van de SVG valt net buiten beeld (right: -3%).
+   ------------------------------------------------------------------------- */
+.koe {
+  position: absolute;
+  right: -3%;
+  width: clamp(7rem, 16vw, 12rem);
+  aspect-ratio: 119.1 / 190.2;
+  background: var(--inkt);
+  -webkit-mask: url("../Assets/Illustraties/koe-gravure.svg") right center / contain no-repeat;
+          mask: url("../Assets/Illustraties/koe-gravure.svg") right center / contain no-repeat;
+  pointer-events: none;
+}
+
+
+/* ---------- 12. VISITEKAART ---------------------------------------------
+   Het visitekaartje als object, liggend op een foto (zoals de mockups).
+   Verhouding 85 × 55 mm. Voorkant beige met logo, achterkant bruin met info.
+   Geen schaduw: het contrast met de foto doet het werk.
+   ------------------------------------------------------------------------- */
+.visitekaart {
+  --papier: var(--beige);
+  --ink: var(--inkt);
+  --ink-zacht: var(--inkt-zacht);
+  --ink-lijn: var(--inkt-lijn);
+  --zone-gat: clamp(1rem, 2.2vw, 1.75rem);
+
+  position: relative;
+  aspect-ratio: 85 / 55;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  background: var(--papier);
+  color: var(--ink);
+}
+.visitekaart--voor { display: grid; place-items: center; }
+.visitekaart--voor .logo { width: 62%; }
+
+.visitekaart--achter {
+  --papier: var(--bruin);
+  --ink: var(--inkt-op-bruin);
+  --ink-zacht: var(--inkt-op-bruin-zacht);
+  --ink-lijn: var(--inkt-op-bruin-lijn);
+  display: grid;
+  align-content: center;
+}
+.visitekaart--achter .zones { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.visitekaart--achter .t-stapel { font-size: var(--t-xs); }
+.visitekaart--achter .t-zin,
+.visitekaart--achter .info li,
+.visitekaart--achter .status { font-size: var(--t-s); }
+.visitekaart--achter .streep { margin-block: var(--r-2); }
+.visitekaart--achter .info { gap: var(--r-1); }
+
+@media (max-width: 760px) {
+  .visitekaart--achter { aspect-ratio: auto; }
+  .visitekaart--achter .zones { grid-template-columns: 1fr; }
+  .visitekaart--achter .zone + .zone { margin-top: var(--r-3); padding-top: var(--r-3); }
+}
+
+
+/* ---------- 13. KOP (header) --------------------------------------------- */
+.kop {
+  --papier: var(--beige);
+  --ink: var(--inkt);
+  --ink-lijn: var(--inkt-lijn);
+
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--papier);
+  border-bottom: var(--lijn) solid transparent;
+  transition: border-color var(--duur) var(--curve);
+}
+.kop.is-los { border-bottom-color: var(--ink-lijn); }
+
+.kop .binnen {
+  display: flex;
+  align-items: center;
+  gap: var(--r-4);
+  min-height: 4.25rem;
+}
+
+.kop__logo { transition: opacity var(--duur) var(--curve); }
+.kop.logo-verborgen .kop__logo { opacity: 0; pointer-events: none; }
+
+.kop__nav { margin-left: auto; }
+.kop__nav ul { display: flex; gap: var(--r-4); }
+.kop__nav a {
+  font-size: var(--t-xs);
+  letter-spacing: var(--spatie-klein);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: var(--gewicht-tekst);
+}
+.kop__nav a:hover { text-decoration: underline; text-underline-offset: 0.4em; }
+
+.kop__menu { display: none; }
+
+@media (max-width: 860px) {
+  .kop__bel { margin-left: auto; }
+  .kop__menu {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: var(--t-xs);
+    letter-spacing: var(--spatie-klein);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .kop__nav {
+    display: none;
+    position: absolute;
+    inset: 100% 0 auto;
+    background: var(--papier);
+    border-bottom: var(--lijn) solid var(--ink-lijn);
+  }
+  .kop__nav.is-open { display: block; }
+  .kop__nav ul { flex-direction: column; gap: 0; padding: 0 var(--rand) var(--r-3); }
+  .kop__nav a { display: block; padding: var(--r-2) 0; border-top: var(--lijn) solid var(--ink-lijn); }
+}

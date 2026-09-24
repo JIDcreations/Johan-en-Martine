@@ -1,0 +1,86 @@
+/* ==========================================================================
+   JOHAN & MARTINE — TOKENS
+   Afgeleid van het drukwerk (visitekaartje + cadeaubon).
+   Alles wat de site gebruikt komt hier vandaan. Niets hardcoden elders.
+   ========================================================================== */
+
+:root {
+  /* ---------------------------------------------------------------------
+     KLEUR
+     Het drukwerk kent twee kleuren: papier (beige) en inkt (bruin).
+     De site ook. Varianten zijn enkel transparanties van die twee.
+     --------------------------------------------------------------------- */
+  --beige: #d6d2c4;
+  --bruin: #382f2d;
+
+  /* Inkt op beige papier */
+  --inkt: var(--bruin);
+  --inkt-zacht: rgba(56, 47, 45, 0.74);   /* secundaire tekst, 5.3:1 */
+  --inkt-lijn: rgba(56, 47, 45, 0.55);    /* haarlijnen */
+
+  /* Beige inkt op bruin papier */
+  --inkt-op-bruin: var(--beige);
+  --inkt-op-bruin-zacht: rgba(214, 210, 196, 0.74);
+  --inkt-op-bruin-lijn: rgba(214, 210, 196, 0.5);
+
+  /* ---------------------------------------------------------------------
+     TYPOGRAFIE
+     Eén letter: DM Sans Light. Zoals op de kaartjes.
+     Lopende tekst iets zwaarder (350) voor leesbaarheid op scherm.
+     --------------------------------------------------------------------- */
+  --font: "DM Sans", system-ui, sans-serif;
+
+  --gewicht: 300;
+  --gewicht-tekst: 350;
+
+  /* Schaal ~ 1.333 (kwart). Vloeiend tussen mobiel en desktop. */
+  --t-xs: 0.75rem;                                      /* 12  onderschrift, labels */
+  --t-s: 0.875rem;                                      /* 14  stapel, uren */
+  --t-m: 1.0625rem;                                     /* 17  lopende tekst */
+  --t-l: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);        /* 20→24  zin groot */
+  --t-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem);        /* 26→40  spatietitel M */
+  --t-xxl: clamp(1.5rem, 0.6rem + 4.6vw, 4.5rem);       /* 28→72  spatietitel L (past op 360px) */
+
+  /* Letterspatiëring: het herkenningsteken van het merk */
+  --spatie-titel: 0.5em;    /* C A D E A U B O N */
+  --spatie-stapel: 0.22em;  /* KWALITEIT, VAKMANSCHAP */
+  --spatie-klein: 0.3em;    /* SLAGERIJ • TRAITEUR */
+
+  --regel-krap: 1.35;       /* gestapelde kapitalen */
+  --regel-tekst: 1.65;
+
+  /* ---------------------------------------------------------------------
+     LIJNEN
+     Altijd 1px. Nooit dikker. Nooit schaduw.
+     --------------------------------------------------------------------- */
+  --lijn: 1px;
+  --streep: 1.75rem;        /* het korte streepje onder een stapel */
+
+  /* ---------------------------------------------------------------------
+     RUIMTE
+     Basis 8px. Het drukwerk is vooral lege ruimte; de site ook.
+     --------------------------------------------------------------------- */
+  --r-1: 0.5rem;    /*   8 */
+  --r-2: 1rem;      /*  16 */
+  --r-3: 1.5rem;    /*  24 */
+  --r-4: 2rem;      /*  32 */
+  --r-5: 3rem;      /*  48 */
+  --r-6: 4.5rem;    /*  72 */
+  --r-7: 7rem;      /* 112 */
+
+  --kaart-pad: clamp(4rem, 2.5rem + 7vw, 9rem);  /* verticale ruimte in een kaart */
+  --zone-gat: clamp(2rem, 1rem + 4vw, 5rem);     /* afstand tot de kolomlijn */
+
+  /* ---------------------------------------------------------------------
+     RASTER
+     --------------------------------------------------------------------- */
+  --breedte: 1180px;
+  --rand: clamp(1rem, 0.4rem + 3vw, 3rem);       /* zijmarge, min 16px */
+
+  /* ---------------------------------------------------------------------
+     BEWEGING
+     Alleen als reactie op een actie (hover, menu). Niets dat vanzelf beweegt.
+     --------------------------------------------------------------------- */
+  --duur: 200ms;
+  --curve: cubic-bezier(0.3, 0.6, 0.2, 1);
+}
