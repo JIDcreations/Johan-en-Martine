@@ -42,7 +42,7 @@
 
 /* ---------- Basis ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 5rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -141,13 +141,21 @@ figure { margin: 0; }
 .kop__nav .knop:hover { background: var(--beige); }
 .kop__tel { display: none; }
 
+.kop__bel {
+  display: none; flex: none;
+  width: 2.9rem; height: 2.9rem; border-radius: 999px;
+  align-items: center; justify-content: center;
+  background: var(--hesp); color: var(--bruin); font-size: 1.35rem;
+}
 .kop__menu {
-  display: none; margin-left: auto;
+  display: none;
   background: none; border: 1.5px solid var(--beige); color: var(--beige);
   border-radius: 999px; padding: 0.6rem 1.1rem; font: inherit; font-weight: 600; cursor: pointer;
 }
 
 @media (max-width: 860px) {
+  .kop__binnen { gap: 0.6rem; }
+  .kop__bel { display: inline-flex; margin-left: auto; }
   .kop__menu { display: block; }
   .kop__nav {
     position: fixed; inset: 0; z-index: -1;
