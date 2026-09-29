@@ -151,42 +151,17 @@
         <p class="feest__intro">Een verjaardag, een communie, een buurtfeest of de ploeg van de voetbalclub. Groot of klein, wij stellen het samen met u op.</p>
 
         <ol class="stappen">
-          <li><strong>U laat weten wanneer en voor hoeveel personen.</strong> Via het formulier of gewoon aan de toog.</li>
+          <li><strong>U laat weten wanneer en voor hoeveel personen.</strong> Aan de telefoon of gewoon aan de toog.</li>
           <li><strong>Wij stellen een voorstel op.</strong> BBQ, spitburgers of een feestmenu, afgestemd op uw gezelschap.</li>
           <li><strong>Op de afgesproken dag ligt alles voor u klaar.</strong> U hoeft enkel nog de barbecue aan te steken.</li>
         </ol>
       </div>
 
-      <form class="aanvraag" data-aanvraag novalidate aria-labelledby="aanvraag-titel">
-        <h3 class="aanvraag__titel" id="aanvraag-titel">Vraag een voorstel</h3>
-
-        <div class="veld veld--breed">
-          <label for="a-naam">Naam</label>
-          <input id="a-naam" name="naam" autocomplete="name" required aria-describedby="a-fout">
-          <p class="aanvraag__fout" id="a-fout" data-fout role="alert"></p>
-        </div>
-        <div class="veld">
-          <label for="a-tel">Telefoon</label>
-          <input id="a-tel" name="telefoon" type="tel" autocomplete="tel">
-        </div>
-        <div class="veld">
-          <label for="a-datum">Datum van het feest</label>
-          <input id="a-datum" name="datum" type="date">
-        </div>
-        <div class="veld veld--breed">
-          <label for="a-man">Aantal personen</label>
-          <input id="a-man" name="personen" inputmode="numeric" pattern="[0-9]*">
-        </div>
-        <div class="veld veld--breed">
-          <label for="a-wat">Wat hebt u in gedachten?</label>
-          <textarea id="a-wat" name="wat" rows="3"></textarea>
-        </div>
-
-        <div class="aanvraag__onder">
-          <button class="knop knop--bruin knop--groot" type="submit">Mail uw aanvraag</button>
-          <p>Dit opent uw mailprogramma. Liever bellen? <a href="tel:+3293555686">09 355 56 86</a></p>
-        </div>
-      </form>
+      <div class="aanvraag">
+        <h3 class="aanvraag__titel">Contacteer ons</h3>
+        <a class="aanvraag__tel" href="tel:+3293555686"><i class="ph-light ph-phone" aria-hidden="true"></i>09 355 56 86</a>
+        <p>Bel ons, of kom langs in de winkel. Dan maken we samen een voorstel op.</p>
+      </div>
     </section>
 
     <!-- ============ BEZOEK ============ -->
@@ -232,12 +207,42 @@
 
   <!-- ============ VOET ============ -->
   <footer class="voet">
-    <img class="voet__logo" src="Assets/Branding/Logo-Beige.svg" alt="Johan &amp; Martine" width="1488" height="674" loading="lazy">
+    <div class="voet__raster">
+      <div class="voet__merk">
+        <img class="voet__logo" src="Assets/Branding/Logo-Beige.svg" alt="Johan &amp; Martine" width="1488" height="674" loading="lazy">
+        <p>Familieslagerij en traiteur in Beervelde. Belgisch vlees, zelf versneden.</p>
+      </div>
+      <div class="voet__blok">
+        <h2>Bezoek</h2>
+        <p>Beervelde-dorp 87<br>9080 Lochristi</p>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Beervelde-dorp+87+9080+Lochristi" target="_blank" rel="noopener">Plan uw route</a>
+      </div>
+      <div class="voet__blok">
+        <h2>Contact</h2>
+        <a class="voet__tel" href="tel:+3293555686">09 355 56 86</a>
+        <a href="mailto:info@johanenmartine.be">info@johanenmartine.be</a>
+      </div>
+      <div class="voet__blok">
+        <h2>Openingsuren</h2>
+        <dl class="voet__uren">
+          <div><dt>Ma - wo</dt><dd>7:30 - 18:30</dd></div>
+          <div class="is-dicht"><dt>Do</dt><dd>Gesloten</dd></div>
+          <div><dt>Vr - za</dt><dd>7:30 - 18:30</dd></div>
+          <div><dt>Zo</dt><dd>7:30 - 12:30</dd></div>
+        </dl>
+      </div>
+      <nav class="voet__blok" aria-label="Voetmenu">
+        <h2>Snel naar</h2>
+        <a href="#aanbod">Aanbod</a>
+        <a href="#feest">Feesten &amp; BBQ</a>
+        <a href="#contact">Contact &amp; uren</a>
+        <a href="#" data-webshop>Webshop</a>
+      </nav>
+    </div>
+
     <div class="voet__meta">
-      <p>Slagerij &amp; traiteur</p>
-      <p>Beervelde-dorp 87, 9080 Lochristi</p>
-      <p><a href="tel:+3293555686">09 355 56 86</a></p>
-      <p>© <span data-jaar>2026</span> Johan &amp; Martine</p>
+      <p>© <span data-jaar>2026</span> Johan &amp; Martine · Slagerij &amp; traiteur</p>
+      <a href="#top">Naar boven <i class="ph-light ph-arrow-up" aria-hidden="true"></i></a>
     </div>
   </footer>
 

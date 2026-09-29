@@ -12,9 +12,9 @@
   /* Kleur */
   --bruin: #382f2d;          /* merkbruin, hoofdvlak */
   --bruin-diep: #2c2422;     /* tweede vlak, voor ritme */
-  --beige: #d6d2c4;          /* merkbeige, inkt */
-  --beige-zacht: rgba(214, 210, 196, 0.78);
-  --beige-lijn: rgba(214, 210, 196, 0.22);
+  --beige: #d8d2c5;          /* merkbeige, inkt */
+  --beige-zacht: rgba(216, 210, 197, 0.78);
+  --beige-lijn: rgba(216, 210, 197, 0.22);
   --hesp: #eca08f;           /* accent: ham, slagerspapier */
   --hesp-diep: #e48c78;
   
@@ -291,10 +291,10 @@ figure { margin: 0; }
 .tegel--gerechten > img { object-position: 50% 70%; }
 
 .tegel--feest {
-  background: var(--hesp); color: var(--bruin);
+  background: var(--beige); color: var(--bruin);
   transition: background-color 0.35s var(--uit);
 }
-.tegel--feest:hover { background: var(--beige); }
+.tegel--feest:hover { background: var(--hesp); }
 .tegel__pijl {
   display: inline-flex; align-items: center; gap: 0.4em;
   margin-top: 1.5rem; font-weight: 600;
@@ -375,38 +375,26 @@ figure { margin: 0; }
 
 .aanvraag {
   grid-column: 2;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 1.25rem;
   margin: clamp(3rem, 5vw, 4.5rem) var(--rand) var(--sectie) 0;
   max-width: 46rem;
   padding-top: clamp(2rem, 3vw, 2.75rem);
   border-top: 1.5px solid var(--bruin);
 }
 .aanvraag__titel {
-  grid-column: 1 / -1;
   font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em;
   font-size: 2rem; line-height: 1;
 }
-.veld { display: grid; gap: 0.4rem; }
-.veld--breed { grid-column: 1 / -1; }
-.veld label { font-weight: 600; font-size: 0.9375rem; }
-.veld input, .veld textarea {
-  width: 100%; font: inherit; color: var(--bruin);
-  background: rgba(255, 255, 255, 0.28);
-  border: 0; border-bottom: 1.5px solid var(--bruin);
-  padding: 0.75rem 0.85rem;
-  border-radius: 0;
-  transition: background-color 0.2s var(--uit);
+.aanvraag__tel {
+  display: inline-flex; align-items: center; gap: 0.25em;
+  margin: 1.25rem 0 1rem;
+  font-size: var(--t-h2); font-weight: 800; line-height: 1; letter-spacing: -0.03em;
+  white-space: nowrap;
+  border-bottom: 3px solid currentColor; padding-bottom: 0.1em;
+  transition: opacity 0.2s var(--uit);
 }
-.veld textarea { resize: vertical; min-height: 6rem; }
-.veld input:hover, .veld textarea:hover { background: rgba(255, 255, 255, 0.4); }
-.veld input:focus-visible, .veld textarea:focus-visible { outline: 2px solid var(--bruin); outline-offset: 2px; background: rgba(255, 255, 255, 0.5); }
-.veld [aria-invalid="true"] { border-bottom-color: #7a1f12; border-bottom-width: 3px; }
-
-.aanvraag__fout { font-weight: 600; font-size: 0.9375rem; color: #6b1a0f; }
-.aanvraag__fout:empty { display: none; }
-.aanvraag__onder { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
-.aanvraag__onder p { font-size: 0.9375rem; }
-.aanvraag__onder a { font-weight: 600; }
+.aanvraag__tel i { font-size: 0.8em; }
+.aanvraag__tel:hover { opacity: 0.7; }
+.aanvraag p { font-size: var(--t-groot); line-height: 1.4; max-width: 34rem; }
 .feest :focus-visible { outline-color: var(--bruin); }
 
 @media (max-width: 960px) {
@@ -414,9 +402,6 @@ figure { margin: 0; }
   .feest__beeld { grid-row: auto; position: relative; height: auto; aspect-ratio: 3 / 2; }
   .feest__inhoud { grid-column: 1; padding: clamp(3.5rem, 10vw, 5rem) var(--rand) 0; }
   .aanvraag { grid-column: 1; margin-inline: var(--rand); }
-}
-@media (max-width: 520px) {
-  .aanvraag { grid-template-columns: 1fr; }
 }
 
 /* ---------- Bezoek ---------- */
@@ -476,15 +461,45 @@ figure { margin: 0; }
   background: var(--bruin-diep);
   padding: clamp(4rem, 8vw, 7rem) var(--rand) 2rem;
 }
-.voet__logo { width: 100%; max-width: var(--breedte); margin-inline: auto; }
+.voet__raster {
+  max-width: var(--breedte); margin: 0 auto;
+  display: grid; grid-template-columns: minmax(12rem, 1fr) repeat(4, auto); gap: 2.5rem clamp(2rem, 4vw, 4rem);
+}
+.voet__blok { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.voet__blok h2 {
+  font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--hesp); margin-bottom: 0.5rem;
+}
+.voet__blok a { text-decoration: none; transition: color 0.2s var(--uit); }
+.voet__blok a:hover { color: var(--hesp); }
+.voet__tel { font-size: var(--t-groot); font-weight: 800; letter-spacing: -0.02em; }
+.voet__uren { display: grid; grid-template-columns: auto auto; gap: 0.35rem 1.5rem; white-space: nowrap; }
+.voet__uren div { display: contents; }
+.voet__uren dt { color: var(--beige-zacht); }
+.voet__uren .is-dicht dd { color: var(--beige-zacht); }
+.voet__blok a[href^="mailto"] { overflow-wrap: anywhere; }
+.voet__merk { display: grid; gap: 1.25rem; align-content: start; }
+.voet__logo { width: clamp(9rem, 12vw, 12rem); }
+.voet__merk p { max-width: 17rem; color: var(--beige-zacht); }
 .voet__meta {
-  max-width: var(--breedte); margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  max-width: var(--breedte); margin: clamp(3rem, 6vw, 5rem) auto 0;
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem;
   padding-top: 1.5rem; border-top: 1px solid var(--beige-lijn);
   font-size: 0.9375rem; color: var(--beige-zacht);
 }
-.voet__meta a { text-decoration: none; }
+.voet__meta a { text-decoration: none; display: inline-flex; align-items: center; gap: 0.35em; }
 .voet__meta a:hover { color: var(--hesp); }
+
+@media (max-width: 1200px) {
+  .voet__raster { grid-template-columns: repeat(4, auto); justify-content: space-between; }
+  .voet__merk { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .voet__raster { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .voet__raster { grid-template-columns: 1fr; }
+}
 
 /* ---------- Onthullen bij scrollen ----------
    Enkel waar de browser scroll-gestuurde animatie kent. Zonder: alles

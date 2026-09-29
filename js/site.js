@@ -80,47 +80,6 @@ function kop() {
   addEventListener("keydown", (e) => e.key === "Escape" && nav.classList.contains("is-open") && (zet(false), knop.focus()));
 }
 
-// Aanvraag voor een feest: stelt een mail op, geen server nodig
-function aanvraag() {
-  const form = document.querySelector("[data-aanvraag]");
-  if (!form) return;
-  const fout = form.querySelector("[data-fout]");
-  const naam = form.querySelector("#a-naam");
-
-  naam.addEventListener("input", () => {
-    if (naam.value.trim()) { naam.removeAttribute("aria-invalid"); fout.textContent = ""; }
-  });
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const d = Object.fromEntries(new FormData(form));
-
-    if (!d.naam.trim()) {
-      naam.setAttribute("aria-invalid", "true");
-      fout.textContent = "Vul uw naam in, dan weten we wie we mogen contacteren.";
-      naam.focus();
-      return;
-    }
-    fout.textContent = "";
-
-    const datum = d.datum
-      ? new Date(`${d.datum}T12:00`).toLocaleDateString("nl-BE", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
-      : "";
-
-    const gegevens = [
-      `Naam: ${d.naam}`,
-      d.telefoon && `Telefoon: ${d.telefoon}`,
-      datum && `Datum: ${datum}`,
-      d.personen && `Aantal personen: ${d.personen}`,
-    ].filter(Boolean).join("\n");
-    const tekst = d.wat ? `${gegevens}\n\n${d.wat}` : gegevens;
-
-    const onderwerp = `Aanvraag feest${datum ? ` op ${datum}` : ""}`;
-    location.href =
-      `mailto:info@johanenmartine.be?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(tekst)}`;
-  });
-}
-
 // Webshop draait extern; zolang er geen link is, doet de knop niets
 document.querySelectorAll('[data-webshop][href="#"]').forEach((a) =>
   a.addEventListener("click", (e) => e.preventDefault()));
@@ -128,4 +87,3 @@ document.querySelectorAll('[data-webshop][href="#"]').forEach((a) =>
 document.querySelectorAll("[data-jaar]").forEach((el) => (el.textContent = new Date().getFullYear()));
 status();
 kop();
-aanvraag();
