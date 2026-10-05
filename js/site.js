@@ -8,7 +8,7 @@ const UREN = {
   3: [450, 1110],
   4: null,
   5: [450, 1110],
-  6: [450, 1110],
+  6: [450, 1080],  // 7:30 - 18:00
 };
 const DAGEN = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
 
@@ -79,10 +79,6 @@ function kop() {
   nav.addEventListener("click", (e) => e.target.closest("a") && zet(false));
   addEventListener("keydown", (e) => e.key === "Escape" && nav.classList.contains("is-open") && (zet(false), knop.focus()));
 }
-
-// Webshop draait extern; zolang er geen link is, doet de knop niets
-document.querySelectorAll('[data-webshop][href="#"]').forEach((a) =>
-  a.addEventListener("click", (e) => e.preventDefault()));
 
 document.querySelectorAll("[data-jaar]").forEach((el) => (el.textContent = new Date().getFullYear()));
 status();
